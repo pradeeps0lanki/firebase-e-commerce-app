@@ -10,7 +10,7 @@ const products = [
       countInStock: 10,
       rating: 4.5,
       numReviews: 12,
-      id:1
+      id:"1"
     },
     {
       name: 'iPhone 13 Pro ',
@@ -23,7 +23,7 @@ const products = [
       countInStock: 7,
       rating: 4.0,
       numReviews: 8,
-      id:2
+      id:"2"
     },
     {
       name: 'Cannon Camera',
@@ -36,7 +36,7 @@ const products = [
       countInStock: 5,
       rating: 3,
       numReviews: 12,
-      id:3
+      id:"3"
     },
     {
       name: 'Sony Playstation 5',
@@ -49,7 +49,7 @@ const products = [
       countInStock: 11,
       rating: 5,
       numReviews: 12,
-      id:4
+      id:"4"
     },
     {
       name: 'Logitech Mouse',
@@ -62,7 +62,7 @@ const products = [
       countInStock: 7,
       rating: 3.5,
       numReviews: 10,
-      id:5
+      id:"5"
     },
     {
       name: 'Amazon Echo Dot ',
@@ -75,8 +75,8 @@ const products = [
       countInStock: 0,
       rating: 4,
       numReviews: 12,
-      id:6
+      id:"6"
     },
   ];
 
-  export default products; 
+  export default products;  

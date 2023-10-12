@@ -10,6 +10,7 @@ import About from "../pages/About";
 import Products from "../pages/Products";
 import SingleUser from "../pages/SingleUser";
 import Cart from "../pages/Cart";
+import SingleProduct from "../pages/SingleProduct";
 
 const AllRoutes = () => {
   const { login } = useContext(GlobalContext);
@@ -28,6 +29,8 @@ const AllRoutes = () => {
         />
         <Route path="about" element={<About />} />
         <Route path="products" element={<Products />} />
+        <Route path="singleProduct/:id" element={<SingleProduct/>} />
+        <Route path="products/singleProduct/:id" element={<SingleProduct/>} />
       </Routes>
     </div>
   );
