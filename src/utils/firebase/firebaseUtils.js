@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 
-import { getAuth, signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc , collection,writeBatch } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAll4yVWNXEhsU3WG8abX5KXoQbKjZx23M",
@@ -12,12 +12,6 @@ const firebaseConfig = {
   messagingSenderId: "931530083286",
   appId: "1:931530083286:web:ef93977941443e0ecc3277",
 };
-
-
-
-
-
-
 
 const firebaseApp = initializeApp(firebaseConfig);
 
@@ -31,36 +25,28 @@ export const auth = getAuth();
 
 export const authentication = getAuth(firebaseApp);
 
-
-
-
-
-
-
-
-
-
-
-
-
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
-
-
 
 export const db = getFirestore();
 
+export const addCollectionAndDocuments = async (collectionKey,objectsToAdd)=>{
+  const collectionRef = collection(db , collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object)=>{
+    const docRef = doc(collectionRef,object.name.toLowerCase());
+    batch.set(docRef,object);
+  });
+
+  await batch.commit();
+  console.log('done');
+}
+
 export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, "user", userAuth);
-  
+
   const userSnapshot = await getDoc(userDocRef);
-  
+  console.log(userSnapshot);
 
-
-  
-
-  
-  
-
-  return ;
+  return;
 };

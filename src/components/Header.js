@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
 import GlobalContext from "../context/gContext";
 import { useContext, useState } from "react";
+import "./header.scss";
+import Cart from "../pages/Cart";
+import SingleUser from "../pages/SingleUser";
 
 const Header = () => {
   const { account } = useContext(GlobalContext);
-  const [hidden,setHidden]=useState(true);
+  const [hidden, setHidden] = useState(true);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isAccountClick, setIsAccountClick] = useState(false);
 
   return (
     <>
-      <header>
+      <header className="p-2">
         <nav className="bg-white border-gray-200 px-2 lg:px-2 py-2.5 dark:bg-gray-800  ">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className=" flex items-center">
               <svg
                 width="134"
                 height="30"
@@ -65,25 +70,58 @@ const Header = () => {
                     to="signUP"
                     className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                   >
-                    sign up
+                    Login/signUP
                   </Link>
                 </>
               ) : (
                 <>
-                  <Link
-                    to="user"
-                    className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                  >
-                    Account
-                  </Link>
+                  {/* <Link to="user">
+                    <svg
+                      class="w-6 h-6 text-gray-800 dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 19a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 11 14H9a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 10 19Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                      />
+                    </svg>
+                  </Link> */}
+                  <button onClick={() => setIsAccountClick(!isAccountClick)}>
+                    <div className="cart-icon-container">
+                      <svg
+                       
+                        class="w-6 h-6 text-gray-800 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 19a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 11 14H9a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 10 19Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                        />
+                      </svg>
+                    </div>
+
+                    {isAccountClick && <SingleUser />}
+                  </button>
                 </>
               )}
 
               {account === true ? (
-                <button>
-                  <Link to="cart">
+                <button onClick={() => setIsCartOpen(!isCartOpen)}>
+                  <div className="cart-icon-container">
                     <svg
-                      class="w-6 h-6 text-gray-800 dark:text-white"
+                      class=" shopping-icon"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -97,14 +135,15 @@ const Header = () => {
                         d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"
                       />
                     </svg>
-                  </Link>
+                  </div>
+                  {isCartOpen && <Cart />}
                 </button>
               ) : null}
 
               <button
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
-                onClick={()=> setHidden(!hidden)}
+                onClick={() => setHidden(!hidden)}
                 className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="mobile-menu-2"
                 aria-expanded="false"
@@ -137,7 +176,9 @@ const Header = () => {
               </button>
             </div>
             <div
-              className={`${hidden?"hidden":""} justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
+              className={`${
+                hidden ? "hidden" : ""
+              } justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
               id="mobile-menu-2"
             >
               <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -145,7 +186,6 @@ const Header = () => {
                   <Link
                     to="/"
                     className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                    
                   >
                     Home
                   </Link>

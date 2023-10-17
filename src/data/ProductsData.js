@@ -78,5 +78,5 @@ const products = [
       id:"6"
     },
   ];
-
+  
   export default products;  

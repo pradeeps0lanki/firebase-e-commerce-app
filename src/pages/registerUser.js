@@ -17,17 +17,44 @@ const Login = () => {
 
   const db = getFirestore();
 
-  const createUserDocumentFromAuth = async (useR) => {
+  // const createUserDocumentFromAuth = async (useR) => {
+  //   const userDocRef = doc(db, "user", useR);
+
+  //   const userSnapshot = await getDoc(userDocRef);
+
+  //   if (userSnapshot.exists()) {
+  //     const { userName } = userSnapshot.data();
+  //     setUserName(userName);
+
+  //     setExistingUser(true);
+  //     setAccount(true);
+  //   }
+
+  //   return;
+  // };
+  const confirmUserDocumentFromAuth = async (useR) => {
     const userDocRef = doc(db, "user", useR);
 
     const userSnapshot = await getDoc(userDocRef);
 
     if (userSnapshot.exists()) {
-      const { userName } = userSnapshot.data();
-      setUserName(userName);
-
-      setExistingUser(true);
-      setAccount(true);
+      const { phoneNumber, userName } = userSnapshot.data();
+      if (phoneNumber) {
+        setUserName(userName);
+        setLogin(true);
+        setExistingUser(true);
+        setAccount(true);
+      }
+    } else {
+      
+      generateReCaptcha();
+      let appVerifier = window.recaptchaVerifier;
+      signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          setExpandForm(true);
+        })
+        .catch(() => alert("something went wrong"));
     }
 
     return;
@@ -50,19 +77,21 @@ const Login = () => {
 
   const phoneAuth = (e) => {
     e.preventDefault();
+    confirmUserDocumentFromAuth(phoneNumber);
 
-    if (phoneNumber.length >= 12) {
-      generateReCaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-          setExpandForm(true);
-        })
-        .catch(() => alert("something went wrong"));
-    } else {
-      alert("wrong phone number");
-    }
+    // if (phoneNumber.length >= 12) {
+    //   // createUserDocumentFromAuth(phoneNumber);
+    //   generateReCaptcha();
+    //   let appVerifier = window.recaptchaVerifier;
+    //   signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+    //     .then((confirmationResult) => {
+    //       window.confirmationResult = confirmationResult;
+    //       setExpandForm(true);
+    //     })
+    //     .catch(() => alert("something went wrong"));
+    // } else {
+    //   alert("wrong phone number");
+    // }
   };
 
   const handleOtpChange = (e) => {
@@ -73,11 +102,11 @@ const Login = () => {
       confirmationResult
         .confirm(otp)
         .then((result) => {
-          const user = result.user;
+          // const user = result.user;
 
-          if (user.phoneNumber === phoneNumber) {
-            createUserDocumentFromAuth(phoneNumber);
-          }
+          // if (user.phoneNumber === phoneNumber) {
+          //   createUserDocumentFromAuth(phoneNumber);
+          // }
 
           setLogin(true);
         })
@@ -105,7 +134,7 @@ const Login = () => {
                       {expandForm === false ? (
                         <>
                           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            Create your account
+                            Create/Login in your account
                           </h1>
                           <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

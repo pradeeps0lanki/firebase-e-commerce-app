@@ -1,0 +1,6 @@
+.address{
+    width: 50%;
+    margin-left: 4px;
+    overflow: scroll;
+    height: 100px;
+}

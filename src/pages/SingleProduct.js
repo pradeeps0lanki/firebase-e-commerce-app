@@ -6,12 +6,18 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 
 const SingleProduct = () => {
-  const { login } = useContext(GlobalContext);
+  const { login, addItemToCart } = useContext(GlobalContext);
   const params = useParams();
 
   const arr = products.filter((prd) => {
     return prd.id === params.id;
   });
+
+  const addProductToCart = ()=>{
+    addItemToCart(arr[0]);
+    toast.success("added to the cart")
+
+  }
 
   return (
     <main>
@@ -28,16 +34,19 @@ const SingleProduct = () => {
             <p className="ml-2 text-gray-900">brand : {arr[0].brand}</p>
             <span className="text-gray-900 ml-2">price : ₹ {arr[0].price}</span>
           </div>
-          {login === true ? (
+          {login && (
             <div className="flex m-4">
-              <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">
+              {/* <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">
                 Buy
-              </button>
-              <button onClick={()=>{toast.success('added to the cart')}} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">
-                Add
+              </button> */}
+              <button
+                onClick={addProductToCart}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3"
+              >
+                Add To Cart
               </button>
             </div>
-          ) : null}
+          )}
         </div>
       </section>
     </main>
