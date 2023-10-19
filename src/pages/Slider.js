@@ -15,14 +15,14 @@ const Slider = ({ products }) => {
 
   return (
     <Swiper
+      
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
       slidesPerView={window.innerWidth < 750 ? 2 : 5}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      
     >
       <SwiperSlide>{arr[0]}</SwiperSlide>
       <SwiperSlide>{arr[1]}</SwiperSlide>

@@ -1,7 +1,12 @@
 import Slider from "./Slider";
+import "./home.css";
 import products from "../data/ProductsData";
 import groceryProducts from "../data/groceryData";
 import tobaccoProducts from "../data/tobaccoProduct";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <div>
@@ -40,11 +45,26 @@ const Home = () => {
               Speak to Sales
             </a>
           </div>
-          <div className=" lg:mt-0 lg:col-span-5 lg:flex">
-            <img
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
-              alt="mockup"
-            />
+          <div className=" overflow-scroll  mt-4  lg:mt-0 lg:col-span-5 lg:flex ">
+            <Carousel
+              showArrows={false}
+              autoPlay={true}
+              infiniteLoop={true}
+              className="carousel-container"
+            >
+              {products.map((product) => {
+                return (
+                  <Link to={`singleProduct/${product.id}`}>
+                    <div key={product.id}>
+                      <img className="img" src={product.image} alt="" />
+                      <h2 className="h2 font-bold">
+                        {product.name} (₹ {product.price})
+                      </h2>
+                    </div>
+                  </Link>
+                );
+              })}
+            </Carousel>
           </div>
         </div>
       </section>
@@ -70,7 +90,7 @@ const Home = () => {
         <p className="m-3">
           {" "}
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
-            Rolling paper & tobacco
+            Laptops And Phones
           </span>
         </p>
         <Slider products={tobaccoProducts} />

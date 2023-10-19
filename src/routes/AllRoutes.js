@@ -14,6 +14,7 @@ import SingleProduct from "../pages/SingleProduct";
 import Checkout from "../pages/Checkout";
 import PaymentPage from "../pages/paymentPage";
 
+
 const AllRoutes = () => {
   const { login } = useContext(GlobalContext);
 
@@ -35,6 +36,7 @@ const AllRoutes = () => {
         <Route path="products/singleProduct/:id" element={<SingleProduct/>} />
         <Route path="checkout" element={<Checkout/>} />
         <Route path="payment" element={login?<PaymentPage/> : <Navigate to='/'/>} />
+        
       </Routes>
     </div>
   );

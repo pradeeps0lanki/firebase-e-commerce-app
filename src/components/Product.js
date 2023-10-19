@@ -1,14 +1,16 @@
-import GlobalContext from "../context/gContext";
-import { useContext } from "react";
+// import GlobalContext from "../context/gContext";
+// import { useContext } from "react";
+// import { Card } from "react-bootstrap";
 import "./product.css";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const Product = ({ products }) => {
-  const { login } = useContext(GlobalContext);
+  // const { login } = useContext(GlobalContext);
 
   return (
     <>
+      
       <div className="m-7  ">
         <Link to={`singleProduct/${products.id}`}>
           <div className=" parent p-3 flex flex-col items-center justify-between max-w-sm   bg-white border border-gray-200   rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -22,21 +24,12 @@ const Product = ({ products }) => {
 
             <div className="">
               <p>
-                <h5 className="">{products.name}</h5>
+                <h5 className="product-title">{products.name}</h5>
               </p>
 
               <div className="flex items-center justify-between">
                 <span className="">₹ {products.price}</span>
-                {/* {login === true ? (
-                <button
-                  onClick={() => {
-                    toast.success("added to the cart");
-                  }}
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3"
-                >
-                  Add
-                </button>
-              ) : null} */}
+                
               </div>
             </div>
           </div>

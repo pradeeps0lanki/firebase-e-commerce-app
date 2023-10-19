@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import products from "../data/ProductsData";
+// import products from "../data/ProductsData";
+import SHOP_DATA from "../data/allProductsData";
 import { addCollectionAndDocuments } from "../utils/firebase/firebaseUtils";
 const GlobalContext = createContext();
 
@@ -23,7 +24,7 @@ function Provider({ children }) {
   }, [cartItems]);
 
   useEffect(() => {
-    addCollectionAndDocuments("categories", products);
+    addCollectionAndDocuments("categories", SHOP_DATA);
   }, []);
 
   const addCartItem = (cartItems, productToAdd) => {

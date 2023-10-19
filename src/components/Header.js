@@ -17,7 +17,7 @@ const Header = () => {
         <nav className="bg-white border-gray-200 px-2 lg:px-2 py-2.5 dark:bg-gray-800  ">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <Link to="/" className=" flex items-center">
-              <svg
+              {/* <svg
                 width="134"
                 height="30"
                 viewBox="0 0 114 30"
@@ -60,7 +60,8 @@ const Header = () => {
                   d="M90.2609 0.00241089H97.4307V5.59215H90.2609V0.00241089Z"
                   fill="#54B226"
                 ></path>
-              </svg>
+              </svg> */}
+              <h1 className="text-2xl font-extrabold">E-STORE</h1>
             </Link>
 
             <div className="flex items-center lg:order-2">

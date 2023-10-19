@@ -1,17 +1,86 @@
-import { useState } from "react";
 import GlobalContext from "../context/gContext";
 import { useContext } from "react";
 import "./paymentPage.css";
+import { useNavigate } from "react-router-dom";
+import PaymentContext from "../context/payment";
+import { toast } from "react-toastify";
+
+import { db } from "../utils/firebase/firebaseUtils";
+import { collection, addDoc } from "firebase/firestore";
 
 const PaymentPage = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [city, setCity] = useState("");
-  const [nextButtonClick, setNextButtonClick] = useState(false);
+  const navigate = useNavigate();
+  const { cartTotal, cartItems } = useContext(GlobalContext);
+  const {
+    name,
+    setName,
+    address,
+    setAddress,
+    pincode,
+    setPincode,
+    phoneNumber,
+    setPhoneNumber,
+    city,
+    setCity,
+    email,
+    setEmail,
+    nextButtonClick,
+    setNextButtonClick,
+  } = useContext(PaymentContext);
 
-  const { cartTotal } = useContext(GlobalContext);
+  const buyNow = async () => {
+    const addressInfo = {
+      name,
+      address,
+      pincode,
+      phoneNumber,
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }),
+    };
+
+    const options = {
+      key: "rzp_test_oQ3EEsQzVnFyJB",
+      key_secret: "jhHlBRZFctNVvJUielULRosM",
+      amount: parseInt(cartTotal + 70),
+      currency: "INR",
+      order_receipt: "order_rcptid_" + name,
+      name: "E-Commerce",
+      description: "for testing purpose",
+      handler: function (response) {
+        console.log(response);
+        toast.success("Payment Successful");
+        const paymentId = response.razorpay_payment_id;
+
+        const orderInfo = {
+          cartItems,
+          addressInfo,
+          date: new Date().toLocaleString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }),
+          email,
+
+          paymentId,
+        };
+
+        try {
+          const orderRef = collection(db, "order");
+          addDoc(orderRef, orderInfo);
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    };
+
+    const pay = new window.Razorpay(options);
+    pay.open();
+    console.log(pay);
+  };
 
   const handleAddressChange = (e) => {
     setAddress(e.target.value);
@@ -32,12 +101,23 @@ const PaymentPage = () => {
   const handlePinCodeChange = (e) => {
     setPincode(e.target.value);
   };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!name || !address || !city || !phoneNumber || !pincode) {
-      alert("some field is missing");
-      return;
+    if (!name || !address || !city || !phoneNumber || !pincode || !email) {
+      return toast.error("All fields are required", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
     setNextButtonClick(true);
   };
@@ -59,6 +139,10 @@ const PaymentPage = () => {
               <div className=" address">
                 <p className="text-gray-700">{address}</p>
               </div>
+            </div>
+            <div className="mb-2 mr-2 flex justify-between">
+              <p className="text-gray-700">Email</p>
+              <p className="text-gray-700">{email}</p>
             </div>
             <div className="mb-2 mr-2 flex justify-between">
               <p className="text-gray-700">City</p>
@@ -89,7 +173,10 @@ const PaymentPage = () => {
                 </p>
               </div>
             </div>
-            <button className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mt-5 ">
+            <button
+              onClick={buyNow}
+              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mt-5 "
+            >
               Go To Payment Options
             </button>
           </div>
@@ -110,6 +197,18 @@ const PaymentPage = () => {
                     type="text"
                     value={address}
                     onChange={handleAddressChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required=""
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     required=""
                   />

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import products from "../data/ProductsData";
 import "./singleProduct.css";
 import GlobalContext from "../context/gContext";
@@ -15,7 +15,16 @@ const SingleProduct = () => {
 
   const addProductToCart = ()=>{
     addItemToCart(arr[0]);
-    toast.success("added to the cart")
+    toast.success("added to the cart", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    })
 
   }
 
@@ -34,7 +43,7 @@ const SingleProduct = () => {
             <p className="ml-2 text-gray-900">brand : {arr[0].brand}</p>
             <span className="text-gray-900 ml-2">price : ₹ {arr[0].price}</span>
           </div>
-          {login && (
+          {login ? (
             <div className="flex m-4">
               {/* <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">
                 Buy
@@ -45,6 +54,18 @@ const SingleProduct = () => {
               >
                 Add To Cart
               </button>
+            </div>
+          ):(
+            <div className="flex m-4">
+              {/* <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">
+                Buy
+              </button> */}
+              <Link
+                to="/signUP"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3"
+              >
+                Add To Cart
+              </Link>
             </div>
           )}
         </div>

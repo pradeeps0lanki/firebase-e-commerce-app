@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app"; 
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -34,7 +34,7 @@ export const addCollectionAndDocuments = async (collectionKey,objectsToAdd)=>{
   const batch = writeBatch(db);
 
   objectsToAdd.forEach((object)=>{
-    const docRef = doc(collectionRef,object.name.toLowerCase());
+    const docRef = doc(collectionRef,object.title.toLowerCase());
     batch.set(docRef,object);
   });
 
@@ -49,4 +49,6 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   console.log(userSnapshot);
 
   return;
-};
+}; 
+
+
