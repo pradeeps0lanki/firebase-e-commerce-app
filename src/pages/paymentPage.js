@@ -10,7 +10,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 const PaymentPage = () => {
   const navigate = useNavigate();
-  const { cartTotal, cartItems } = useContext(GlobalContext);
+  const { cartTotal, cartItems, phoneNumber } = useContext(GlobalContext);
   const {
     name,
     setName,
@@ -18,8 +18,7 @@ const PaymentPage = () => {
     setAddress,
     pincode,
     setPincode,
-    phoneNumber,
-    setPhoneNumber,
+
     city,
     setCity,
     email,
@@ -44,14 +43,23 @@ const PaymentPage = () => {
     const options = {
       key: "rzp_test_oQ3EEsQzVnFyJB",
       key_secret: "jhHlBRZFctNVvJUielULRosM",
-      amount: parseInt(cartTotal + 70),
+      amount: parseInt(cartTotal + 70).toString() + "00",
       currency: "INR",
       order_receipt: "order_rcptid_" + name,
       name: "E-Commerce",
       description: "for testing purpose",
       handler: function (response) {
         console.log(response);
-        toast.success("Payment Successful");
+        toast.success("Payment Successful", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         const paymentId = response.razorpay_payment_id;
 
         const orderInfo = {
@@ -68,18 +76,18 @@ const PaymentPage = () => {
         };
 
         try {
-          const orderRef = collection(db, "order");
+          const orderRef = collection(db, `orders/${phoneNumber}/allOrders/`);
           addDoc(orderRef, orderInfo);
+
           navigate("/");
         } catch (error) {
-          console.log(error);
+          alert("something went wrong");
         }
       },
     };
 
     const pay = new window.Razorpay(options);
     pay.open();
-    console.log(pay);
   };
 
   const handleAddressChange = (e) => {
@@ -92,10 +100,6 @@ const PaymentPage = () => {
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-  };
-
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
   };
 
   const handlePinCodeChange = (e) => {
@@ -152,10 +156,7 @@ const PaymentPage = () => {
               <p className="text-gray-700">Pincode</p>
               <p className="text-gray-700">{pincode}</p>
             </div>
-            <div className="mb-2 mr-2 flex justify-between">
-              <p className="text-gray-700">Phone Number</p>
-              <p className="text-gray-700">{phoneNumber}</p>
-            </div>
+
             <div className="mb-2 mr-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
               <p className="text-gray-700">₹{Math.floor(cartTotal)}</p>
@@ -245,18 +246,6 @@ const PaymentPage = () => {
                     type="text"
                     value={name}
                     onChange={handleNameChange}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    required=""
-                  />
-                </div>
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Phone Number
-                  </label>
-                  <input
-                    type="number"
-                    value={phoneNumber}
-                    onChange={handlePhoneNumberChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     required=""
                   />

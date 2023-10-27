@@ -1,9 +1,16 @@
 .product-image{
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 190px;
+    
 }
 .parent{
     width: 200px;
-    height: 200px;
+    height: 290px;
 }
- 
+
+/* 
+@media (min-width: 640px) {
+    .product-image {
+        height:  150px;
+    }
+} */

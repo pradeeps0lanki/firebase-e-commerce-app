@@ -9,7 +9,7 @@ export const PaymentProvider = ({ children }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
-  const [nextButtonClick, setNextButtonClick] = useState(false); 
+  const [nextButtonClick, setNextButtonClick] = useState(false);
 
   const valueToShare = {
     name,
@@ -25,12 +25,13 @@ export const PaymentProvider = ({ children }) => {
     email,
     setEmail,
     nextButtonClick,
-    setNextButtonClick
-   
+    setNextButtonClick,
   };
 
   return (
-    <PaymentContext.Provider value={valueToShare}>{children}</PaymentContext.Provider>
+    <PaymentContext.Provider value={valueToShare}>
+      {children}
+    </PaymentContext.Provider>
   );
 };
 

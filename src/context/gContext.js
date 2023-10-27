@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import products from "../data/ProductsData";
 import SHOP_DATA from "../data/allProductsData";
 import { addCollectionAndDocuments } from "../utils/firebase/firebaseUtils";
 const GlobalContext = createContext();

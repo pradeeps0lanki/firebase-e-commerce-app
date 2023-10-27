@@ -17,21 +17,6 @@ const Login = () => {
 
   const db = getFirestore();
 
-  // const createUserDocumentFromAuth = async (useR) => {
-  //   const userDocRef = doc(db, "user", useR);
-
-  //   const userSnapshot = await getDoc(userDocRef);
-
-  //   if (userSnapshot.exists()) {
-  //     const { userName } = userSnapshot.data();
-  //     setUserName(userName);
-
-  //     setExistingUser(true);
-  //     setAccount(true);
-  //   }
-
-  //   return;
-  // };
   const confirmUserDocumentFromAuth = async (useR) => {
     const userDocRef = doc(db, "user", useR);
 
@@ -46,7 +31,6 @@ const Login = () => {
         setAccount(true);
       }
     } else {
-      
       generateReCaptcha();
       let appVerifier = window.recaptchaVerifier;
       signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
@@ -78,20 +62,6 @@ const Login = () => {
   const phoneAuth = (e) => {
     e.preventDefault();
     confirmUserDocumentFromAuth(phoneNumber);
-
-    // if (phoneNumber.length >= 12) {
-    //   // createUserDocumentFromAuth(phoneNumber);
-    //   generateReCaptcha();
-    //   let appVerifier = window.recaptchaVerifier;
-    //   signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
-    //     .then((confirmationResult) => {
-    //       window.confirmationResult = confirmationResult;
-    //       setExpandForm(true);
-    //     })
-    //     .catch(() => alert("something went wrong"));
-    // } else {
-    //   alert("wrong phone number");
-    // }
   };
 
   const handleOtpChange = (e) => {
@@ -102,12 +72,6 @@ const Login = () => {
       confirmationResult
         .confirm(otp)
         .then((result) => {
-          // const user = result.user;
-
-          // if (user.phoneNumber === phoneNumber) {
-          //   createUserDocumentFromAuth(phoneNumber);
-          // }
-
           setLogin(true);
         })
         .catch((error) => {
@@ -122,7 +86,7 @@ const Login = () => {
         <UserAccount />
       ) : (
         <>
-          <div classNameName="mt-0">
+          <div className="mt-0">
             <section className="bg-gray-50 dark:bg-gray-900">
               <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

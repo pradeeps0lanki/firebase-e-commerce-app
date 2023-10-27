@@ -5,8 +5,8 @@ const tobaccoProducts = [
       description:
         'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
       brand: 'Apple',
-      category: 'Electronics',
-      price: 30000,
+      category: 'Laptops And Phones',
+      price: 34000,
       countInStock: 10,
       rating: 4.5,
       numReviews: 12,
@@ -18,8 +18,8 @@ const tobaccoProducts = [
       description:
         'Introducing the iPhone 13 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
       brand: 'Apple',
-      category: 'Electronics',
-      price: 95000,
+      category: 'Laptops And Phones',
+      price: 98000,
       countInStock: 7,
       rating: 4.0,
       numReviews: 8,
@@ -31,21 +31,21 @@ const tobaccoProducts = [
       description:
         'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design',
       brand: 'Cannon',
-      category: 'Electronics',
-      price: 70000,
+      category: 'Laptops And Phones',
+      price: 79000,
       countInStock: 5,
       rating: 3,
       numReviews: 12,
       id:3
     },
     {
-      name: 'Sony Playstation 5',
+      name: 'Sony Playstation',
       image: 'https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHM1fGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60',
       description:
         'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
       brand: 'Sony',
-      category: 'Electronics',
-      price: 50000,
+      category: 'Laptops And Phones',
+      price: 51000,
       countInStock: 11,
       rating: 5,
       numReviews: 12,
@@ -57,8 +57,8 @@ const tobaccoProducts = [
       description:
         'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
       brand: 'Logitech',
-      category: 'Electronics',
-      price: 3000,
+      category: 'Laptops And Phones',
+      price: 3080,
       countInStock: 7,
       rating: 3.5,
       numReviews: 10,
@@ -70,8 +70,8 @@ const tobaccoProducts = [
       description:
         'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
       brand: 'Amazon',
-      category: 'Electronics',
-      price: 4000,
+      category: 'Laptops And Phones',
+      price: 4500,
       countInStock: 0,
       rating: 4,
       numReviews: 12,
@@ -79,4 +79,4 @@ const tobaccoProducts = [
     },
   ];
 
-  export default tobaccoProducts; 
+  export default tobaccoProducts;  

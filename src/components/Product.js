@@ -1,40 +1,31 @@
-// import GlobalContext from "../context/gContext";
-// import { useContext } from "react";
-// import { Card } from "react-bootstrap";
 import "./product.css";
 import { Link } from "react-router-dom";
-// import { toast } from "react-toastify";
 
 const Product = ({ products }) => {
-  // const { login } = useContext(GlobalContext);
-
   return (
     <>
-      
-      <div className="m-7  ">
-        <Link to={`singleProduct/${products.id}`}>
-          <div className=" parent p-3 flex flex-col items-center justify-between max-w-sm   bg-white border border-gray-200   rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <p>
-              <img
-                className="p-1 rounded-t-lg product-image "
-                src={products.image}
-                alt=""
-              />
+      <Link to={`singleProduct/${products.id}`}>
+        <div className="m-2 parent flex flex-col items-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+          <img
+            className="rounded-t-lg p-2  sm:h-64 product-image"
+            src={products.image}
+            alt=""
+          />
+
+          <div className="p-2 mt-4">
+            <p className="   tracking-tight text-gray-900 dark:text-white">
+              {products.name}
             </p>
 
-            <div className="">
-              <p>
-                <h5 className="product-title">{products.name}</h5>
-              </p>
-
-              <div className="flex items-center justify-between">
-                <span className="">₹ {products.price}</span>
-                
-              </div>
-            </div>
+            <p className="flex justify-between items-center mt-2">
+              <span className=" dark:text-gray-200">
+                <span>₹</span>
+                <span>{products.price}</span>
+              </span>
+            </p>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     </>
   );
 };

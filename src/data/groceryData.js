@@ -5,7 +5,7 @@ const groceryProducts = [
       description:
         'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
       brand: 'Apple',
-      category: 'Electronics',
+      category: 'grocery products',
       price: 30000,
       countInStock: 10,
       rating: 4.5,
@@ -18,7 +18,7 @@ const groceryProducts = [
       description:
         'Introducing the iPhone 13 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
       brand: 'Apple',
-      category: 'Electronics',
+      category: 'grocery products',
       price: 95000,
       countInStock: 7,
       rating: 4.0,
@@ -31,7 +31,7 @@ const groceryProducts = [
       description:
         'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design',
       brand: 'Cannon',
-      category: 'Electronics',
+      category: 'grocery products',
       price: 70000,
       countInStock: 5,
       rating: 3,
@@ -39,12 +39,12 @@ const groceryProducts = [
       id:3
     },
     {
-      name: 'Sony Playstation 5',
+      name: 'Sony Playstation',
       image: 'https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHM1fGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60',
       description:
         'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
       brand: 'Sony',
-      category: 'Electronics',
+      category: 'grocery products',
       price: 50000,
       countInStock: 11,
       rating: 5,
@@ -57,7 +57,7 @@ const groceryProducts = [
       description:
         'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
       brand: 'Logitech',
-      category: 'Electronics',
+      category: 'grocery products',
       price: 3000,
       countInStock: 7,
       rating: 3.5,
@@ -70,7 +70,7 @@ const groceryProducts = [
       description:
         'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
       brand: 'Amazon',
-      category: 'Electronics',
+      category: 'grocery products',
       price: 4000,
       countInStock: 0,
       rating: 4,
@@ -79,4 +79,4 @@ const groceryProducts = [
     },
   ];
 
-  export default groceryProducts; 
+  export default groceryProducts;  

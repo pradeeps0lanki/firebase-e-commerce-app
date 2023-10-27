@@ -2,7 +2,6 @@ import GlobalContext from "../context/gContext";
 import { useContext } from "react";
 import "./checkout.scss";
 import CheckOutItem from "../components/CheckOutItem";
-// import PaymentForm from "../components/payment-form/PaymentForm";
 import { Link } from "react-router-dom";
 
 const Checkout = () => {
